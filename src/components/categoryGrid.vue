@@ -245,15 +245,10 @@
 }
 
 @media screen and (max-width: 414px) {
-       .green-section{
-              /* width:75%; */
-       } 
+     
        .green-section img{
               left:0;
               width:80%;
-       }
-       .yellow-section{
-              /* width:75%; */
        }
        .two-section {
         display: flex;

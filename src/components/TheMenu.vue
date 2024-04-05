@@ -5,7 +5,7 @@
               <!-- <div class="logo"><a href="/">Organic Farm</a></div> -->
               <!-- <router-link to="/">Home</router-link> -->
               <router-link to="/" class="logo">Organic Farm</router-link>
-              <div class="search"><input type="text" placeholder="search.."></div>
+              <div class="search"><input type="text" placeholder="search.." v-model="searchQuery" @input="emitSearchQuery"></div>
               <div class="acct-btns">
                      <div class="my-acct">
                          <img src="../assets/user.svg"/><span> My Account</span> 
@@ -59,10 +59,13 @@
 </template>
 
 <script>
+
+
        export default {
               data(){
                      return{
-                            display:false
+                            display:false,
+                            searchQuery:''
                      }
               },
               methods:{
@@ -71,9 +74,16 @@
                      },
               closeMenu(){
                      this.display = false
-              }
-       }
-       }
+              },
+              emitSearchQuery() {
+      this.$emit('search-query', this.searchQuery);
+    },
+    
+      
+},
+
+}
+
 </script>
 
 <style scoped>

@@ -89,4 +89,85 @@ button{
   margin-top:15px;
   text-transform: uppercase;
 }
+/* Medium devices (tablets, less than 912px) */
+@media screen and (max-width:912px) {
+  .image img {
+    width: 300px;
+    height: auto;
+}
+.content h2{
+    font-size: 25px;
+    line-height: 25px;
+}
+
+}
+
+
+@media screen and (max-width: 768px) {
+
+  .image img {
+    width: 300px;
+    height: auto;
+}
+.content h2{
+    font-size: 25px;
+    line-height: 25px;
+}
+
+
+}
+
+@media screen and (max-width: 575.98px) {
+  .wrapper{
+    flex-wrap: wrap;
+    padding-bottom:130px;
+  }
+  .image img {
+    width: 300px;
+    height: auto;
+}
+.content h2{
+    font-size: 25px;
+    line-height: 25px;
+}
+
+ }
+
+
+/* less than 390px */
+@media screen and (max-width: 390px) { 
+  .wrapper{
+    flex-wrap: wrap;
+    padding:18px;
+    padding-bottom:130px;
+    overflow:hidden;
+  }
+  .image img {
+    width: 300px;
+    height: auto;
+}
+.content h2{
+    font-size: 25px;
+    line-height: 25px;
+    padding-right: 30px;
+}
+
+}
+@media screen and (max-width: 280px) {
+  .image img {
+    width: 200px;
+    height: auto;
+}
+.content h2{
+    font-size: 20px;
+    line-height: 25px;
+   
+}
+.content{
+  width:200px;
+}
+.content p{
+ font-size: 12px;
+}
+ }
 </style>

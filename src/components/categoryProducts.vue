@@ -1,5 +1,6 @@
 <template>
   <div>
+  
     <div class="container">
       <div class="tabs">
         <button
@@ -11,12 +12,15 @@
         >
           {{ tab }}
         </button>
+       
+        
       </div>
     </div>
 
     <div class="products">
+      
       <div
-        v-for="(product,id) in fetchProducts"
+        v-for="(product,id) in filteredProducts"
         :key="id"
         class="single-products"
       >
@@ -28,7 +32,8 @@
           <h6>{{ product.title }}</h6>
           <p class="price">{{ product.price }}</p>
           <!-- Pass product id to viewDetails method when button is clicked -->
-       <router-link :to="`/product/${product.id}`">View Details</router-link>
+          <router-link :to="`/product/${product.id}`">View Details</router-link>
+        
         </div>
       </div>
     </div>
@@ -36,40 +41,38 @@
 </template>
 
 <script setup>
-import axios from 'axios'
-import { ref, onMounted}  from 'vue';
 
+import axios from 'axios';
+import { ref, onMounted, computed, defineProps } from 'vue';
 
-
-       const tabs = ref([
-                     "Fresh Vegetables",
-                     'Stables','Nuts & Seeds','Leafy Greens',
-                     'Roots'
-
-])
+const tabs = ref([
+  "Fresh Vegetables",
+  'Stables', 'Nuts & Seeds', 'Leafy Greens',
+  'Roots'
+]);
 const activeIndex = ref(0);
-const fetchProducts = ref([]);
-
+const props = defineProps(['query']) /*this is to accept the query from the homepage as props*/
+const products = ref([]);
 
 onMounted(async () => {
   try {
     const response = await axios.get('https://fakestoreapi.com/products');
-    fetchProducts.value = response.data;
+    products.value = response.data;
   } catch (error) {
     console.error('Error fetching products:', error);
   }
 });
-// const filteredProducts = computed(() => {
-//   return fetchProducts.value.filter(product => {
-//     // Filter condition: Exclude products with empty or invalid data and ID equal to 0
-//     return product && product.id !== undefined && product.id !== null && product.id !== 0;
-//   });
-// });
 
+const filteredProducts = computed(() => {
+  console.log(props.query)
+  return products.value.filter(product =>
 
+    product.title.toLowerCase().includes(props.query.toLowerCase())
+
+  );
+});
 
 </script>
-
 <style scoped>
 .tabs {
   text-align: center;
@@ -122,7 +125,7 @@ onMounted(async () => {
 }
 .img-container img {
   width: 100%;
-  height: 100%;
+  height: auto;
   border-radius: 10px 20px 0px 0px;
   object-fit: cover; /* Maintain aspect ratio while covering the container */
 }
@@ -176,6 +179,9 @@ a{
 @media screen and (max-width: 390px) { 
   .banner{
     padding:4rem 2rem;
+  }
+  .products{
+    padding:20px;
   }
   .products > div{
     flex: 10 0 calc(50% - 05px); /* Two columns with a gap of 20px */
